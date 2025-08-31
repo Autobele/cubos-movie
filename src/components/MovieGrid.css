@@ -1,0 +1,9 @@
+.movie-grid-wrapper {
+    display: grid;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+    max-width: calc((235px + 24px) * 5 - 24px);
+    margin: 0 auto;
+}

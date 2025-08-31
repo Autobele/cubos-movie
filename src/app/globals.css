@@ -1,26 +1,199 @@
-@import "tailwindcss";
+/* Tailwind Config */
+/* @import "tailwindcss" */
+/* @import "tailwindcss/preflight";
+@config "../../taildwind.config.ts";
+@tailwind utilities; */
+
+/* Radix Colors */
+/* @import "@radix-ui/colors/purple.css";
+@import "@radix-ui/colors/purple-dark.css";
+@import "@radix-ui/colors/purple-alpha.css";
+@import "@radix-ui/colors/mauve.css";
+@import "@radix-ui/colors/mauve-dark.css";
+@import "@radix-ui/colors/mauve-alpha.css"; */
+
+@tailwind utilities;
+
+/* Radix Colors */
+@import "@radix-ui/colors/purple.css";
+@import "@radix-ui/colors/purple-dark.css";
+@import "@radix-ui/colors/purple-alpha.css";
+@import "@radix-ui/colors/mauve.css";
+@import "@radix-ui/colors/mauve-dark.css";
+@import "@radix-ui/colors/mauve-alpha.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--mauve-1);
+  --foreground: var(--mauve-1);
+  --primary: var(--purple9);
+  --secondary: var(--purpleA2);
+  --base: var(--mauve-12);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --background: var(--mauveDark-1);
+  --base: var(--mauveDark-12);
+  --primary: var(--purple9);
+  --secondary: var(--purpleA2);
+  --foreground: var(--mauveDark-1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.rounded-button {
+  width: 64px;
+  height: 48px;
+  background-color: var(--purple-9);
+  padding: 12px 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.font-bold {
+  font-weight: 600;
+}
+
+.font-semibold {
+  font-weight: 400;
+}
+
+.flex-responsive {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1302) {
+
+  /* md breakpoint padrão do Tailwind */
+  .flex-responsive {
+    flex-direction: row;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (min-width: 768px) {
+  .img-responsive {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+
+@theme {
+  --color-purple-1: var(--purple-1);
+  --color-purple-2: var(--purple-2);
+  --color-purple-3: var(--purple-3);
+  --color-purple-4: var(--purple-4);
+  --color-purple-5: var(--purple-5);
+  --color-purple-6: var(--purple-6);
+  --color-purple-7: var(--purple-7);
+  --color-purple-8: var(--purple-8);
+  --color-purple-9: var(--purple-9);
+  --color-purple-10: var(--purple-10);
+  --color-purple-11: var(--purple-11);
+  --color-purple-12: var(--purple-12);
+
+  --color-purple-a1: var(--purple-a1);
+  --color-purple-a2: var(--purple-a2);
+  --color-purple-a3: var(--purple-a3);
+  --color-purple-a4: var(--purple-a4);
+  --color-purple-a5: var(--purple-a5);
+  --color-purple-a6: var(--purple-a6);
+  --color-purple-a7: var(--purple-a7);
+  --color-purple-a8: var(--purple-a8);
+  --color-purple-a9: var(--purple-a9);
+  --color-purple-a10: var(--purple-a10);
+  --color-purple-a11: var(--purple-a11);
+  --color-purple-a12: var(--purple-a12);
+
+  --color-mauve-1: var(--mauve-1);
+  --color-mauve-2: var(--mauve-2);
+  --color-mauve-3: var(--mauve-3);
+  --color-mauve-4: var(--mauve-4);
+  --color-mauve-5: var(--mauve-5);
+  --color-mauve-6: var(--mauve-6);
+  --color-mauve-7: var(--mauve-7);
+  --color-mauve-8: var(--mauve-8);
+  --color-mauve-9: var(--mauve-9);
+  --color-mauve-10: var(--mauve-10);
+  --color-mauve-11: var(--mauve-11);
+  --color-mauve-12: var(--mauve-12);
+
+  --color-mauve-a1: var(--mauve-a1);
+  --color-mauve-a2: var(--mauve-a2);
+  --color-mauve-a3: var(--mauve-a3);
+  --color-mauve-a4: var(--mauve-a4);
+  --color-mauve-a5: var(--mauve-a5);
+  --color-mauve-a6: var(--mauve-a6);
+  --color-mauve-a7: var(--mauve-a7);
+  --color-mauve-a8: var(--mauve-a8);
+  --color-mauve-a9: var(--mauve-a9);
+  --color-mauve-a10: var(--mauve-a10);
+  --color-mauve-a11: var(--mauve-a11);
+  --color-mauve-a12: var(--mauve-a12);
+}
+
+@layer theme {
+  .dark {
+    --background: var(--mauve-1);
+    --foreground: var(--mauve-12);
+    --primary-color: var(--purple-9);
+
+    --color-purple-1: var(--purple-1);
+    --color-purple-2: var(--purple-2);
+    --color-purple-3: var(--purple-3);
+    --color-purple-4: var(--purple-4);
+    --color-purple-5: var(--purple-5);
+    --color-purple-6: var(--purple-6);
+    --color-purple-7: var(--purple-7);
+    --color-purple-8: var(--purple-8);
+    --color-purple-9: var(--purple-9);
+    --color-purple-10: var(--purple-10);
+    --color-purple-11: var(--purple-11);
+    --color-purple-12: var(--purple-12);
+
+    --color-purple-a1: var(--purple-a1);
+    --color-purple-a2: var(--purple-a2);
+    --color-purple-a3: var(--purple-a3);
+    --color-purple-a4: var(--purple-a4);
+    --color-purple-a5: var(--purple-a5);
+    --color-purple-a6: var(--purple-a6);
+    --color-purple-a7: var(--purple-a7);
+    --color-purple-a8: var(--purple-a8);
+    --color-purple-a9: var(--purple-a9);
+    --color-purple-a10: var(--purple-a10);
+    --color-purple-a11: var(--purple-a11);
+    --color-purple-a12: var(--purple-a12);
+
+    --color-mauve-1: var(--mauve-1);
+    --color-mauve-2: var(--mauve-2);
+    --color-mauve-3: var(--mauve-3);
+    --color-mauve-4: var(--mauve-4);
+    --color-mauve-5: var(--mauve-5);
+    --color-mauve-6: var(--mauve-6);
+    --color-mauve-7: var(--mauve-7);
+    --color-mauve-8: var(--mauve-8);
+    --color-mauve-9: var(--mauve-9);
+    --color-mauve-10: var(--mauve-10);
+    --color-mauve-11: var(--mauve-11);
+    --color-mauve-12: var(--mauve-12);
+
+    --color-mauve-a1: var(--mauve-a1);
+    --color-mauve-a2: var(--mauve-a2);
+    --color-mauve-a3: var(--mauve-a3);
+    --color-mauve-a4: var(--mauve-a4);
+    --color-mauve-a5: var(--mauve-a5);
+    --color-mauve-a6: var(--mauve-a6);
+    --color-mauve-a7: var(--mauve-a7);
+    --color-mauve-a8: var(--mauve-a8);
+    --color-mauve-a9: var(--mauve-a9);
+    --color-mauve-a10: var(--mauve-a10);
+    --color-mauve-a11: var(--mauve-a11);
+    --color-mauve-a12: var(--mauve-a12);
+  }
 }
