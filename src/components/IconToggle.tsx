@@ -17,7 +17,7 @@ export function IconToggle({ active, onToggle, icon, activeIcon, className }: Ic
         rounded-button 
         border-none
         outline-none
-        ${active ? "bg-purple9 text-white" : "bg-[#B744F714]"} 
+        ${active ? "bg-purple-9 text-white opacity-50" : "bg-[#B744F714]"} 
         ${className ?? ""}
       `}
         >

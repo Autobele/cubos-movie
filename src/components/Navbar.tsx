@@ -1,12 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { IconButton } from "./IconButton";
-import { Filter, MoonAltFill, Sun } from "@/icons";
+import { MoonAltFill, Sun } from "@/icons";
 import { IconToggle } from "./IconToggle";
-import Link from "next/link";
 
 export const Navbar = () => {
     const { theme, setTheme } = useTheme();
@@ -17,10 +16,10 @@ export const Navbar = () => {
 
 
     return (
-        <header className="relative top-0 left-0 w-full z-50 bg-background border-b-[1px] border-b-mauve1-opaque">
+        <header className="relative top-0 left-0 w-full z-50 bg-background border-b-[1px] border-b-mauve-12/30">
             <nav className="max-w-6xl mx-auto w-[90%] flex justify-between px-4 py-[22px]">
-                <Link href="/" className="no-underline text-mauve-12">
-                    <div className="flex items-center justify-center flex-shrink-0">
+                <Link href="/" legacyBehavior>
+                    <a className="flex items-center text-mauve-12 no-underline justify-center flex-shrink-0">
                         <Image
                             src={`/assets/logo-cubos${theme === "dark" ? "-white" : ""}.svg`}
                             alt="Logo"
@@ -29,7 +28,7 @@ export const Navbar = () => {
                             priority
                         />
                         <h2 className={`font-inter text-[20px] ml-[16px] no-underline`}>Movies</h2>
-                    </div>
+                    </a>
                 </Link>
 
                 <IconToggle

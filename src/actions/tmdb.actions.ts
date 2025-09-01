@@ -3,22 +3,38 @@ import { MovieCard, MovieDetail } from "@/config/types/movie-card";
 import { TmdbVideoResponse } from "@/config/types/movie-video";
 import { TMDBApiResponse } from "@/config/types/tmdb-response";
 import { API_KEY, API_URL } from "@/constants";
+import { getGenreId } from "@/utils";
 
-export async function fetchAllMovies(searchTerm?: string, page: number = 1): Promise<MovieCard[]> {
+export interface FetchAllMoviesParams {
+    searchTerm?: string,
+    searchGenres?: string,
+    page?: number
+}
+
+export async function fetchAllMovies({ searchTerm, searchGenres, page = 1 }: FetchAllMoviesParams): Promise<TMDBApiResponse<MovieCard> | null> {
     try {
-        const endpoint = searchTerm
-            ? `/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(searchTerm)}&language=pt-BR`
-            : `/3/movie/popular?api_key=${API_KEY}`;
+        let endpoint = '';
+        const genreId = searchGenres ? getGenreId(searchGenres) : null;
 
+        if (searchTerm) {
+            // Busca por texto: gênero é ignorado (limitação da API)
+            endpoint = `/3/search/movie?api_key=${API_KEY}&language=pt-BR&page=${page}&query=${encodeURIComponent(searchTerm)}`;
+        } else if (genreId) {
+            // Busca por gênero
+            endpoint = `/3/discover/movie?api_key=${API_KEY}&language=pt-BR&page=${page}&with_genres=${genreId}`;
+        } else {
+            // Filmes populares
+            endpoint = `/3/movie/popular?api_key=${API_KEY}&page=${page}&language=pt-BR`;
+        }
         const res = await fetch(`${API_URL}${endpoint}`);
 
         if (!res.ok) throw new Error("Erro ao buscar filmes");
 
         const data: TMDBApiResponse<MovieCard> = await res.json();
-        return data.results;
+        return data;
     } catch (error) {
         console.error(error);
-        return [];
+        return null;
     }
 }
 

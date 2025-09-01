@@ -3,15 +3,17 @@ import { fetchMovieDetails, fetchMovieVideos } from '@/actions/tmdb.actions';
 import { Wallpaper } from '@/components/Wallpaper';
 import { InfoCard } from '@/components/InfoCard';
 import { formatToCurrencyUSD, formatDatePTBR, formatRunTimeMinutes } from '@/utils';
-import { movieDetailTMDB } from '@/mock/moviesList';
 import { TmdbVideoResponse } from '@/config/types/movie-video';
+import { CircularRating } from '@/components/CircularRating';
+import { useGenres } from '@/hooks/useGenres';
+
 
 interface MovieDetailPageProps {
     params: { id: string };
 }
 
 export default async function MovieDetailPage({ params }: MovieDetailPageProps) {
-    const id = Number(params.id);
+    const id = Number(params?.id);
     if (isNaN(id)) return <div>ID inválido</div>;
 
     const movie: MovieDetail | null = await fetchMovieDetails(id);
@@ -23,7 +25,7 @@ export default async function MovieDetailPage({ params }: MovieDetailPageProps) 
     return (
         <Wallpaper src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE}/original${movie.backdrop_path}`}>
             <div className="flex-responsive flex max-w-[1368px] mx-auto p-[32px] gap-[32px]">
-                <div className='xl:w-full xl:flex xl:items-center xl:justify-center'>
+                <div className=''>
                     <div className='w-full flex justify-center'>
                         <img
                             src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE}/w500${movie.poster_path}`}
@@ -34,7 +36,7 @@ export default async function MovieDetailPage({ params }: MovieDetailPageProps) 
                         />
                     </div>
                 </div>
-                <div className="w-full flex flex-col ">
+                <div className="flex flex-col ">
                     <div className="flex-responsive justify-between">
                         <div>
                             <h1 className="text-[32px] font-bold m-[0px]">{movie.title}</h1>
@@ -42,26 +44,42 @@ export default async function MovieDetailPage({ params }: MovieDetailPageProps) 
                                 <p className='text-mauve-11 m-[0px]'>Titulo Original: {movie.original_title}</p>
                             )}
                         </div>
-                        <div className="flex my-[8px] gap-[8px]">
+                        <div className="flex items-center my-[8px] gap-[8px]">
                             <InfoCard
                                 title='POPULARIDADE'
+                                className='h-fit'
                             >
                                 <span className='font-extralight'>{movie.popularity}</span>
                             </InfoCard>
                             <InfoCard
                                 title='VOTOS'
+                                className='h-fit'
                             >
                                 <span className='font-extralight'>{movie.vote_count}</span>
                             </InfoCard>
-                            <p>Average</p>
+                            <CircularRating rating={movie?.vote_average && Math.round(movie?.vote_average * 10)} size={98} strokeWidth={4} />
                         </div>
                     </div>
-                    <section id="#sinopse" className="mr-[8px] flex-responsive w-full flex justify-between gap-[16px]">
-                        <article className='w-full flex'>
+                    <section className="flex-responsive w-full flex justify-between gap-[32px] ">
+                        <article className=' flex flex-col gap-[8px] mr-[16px]'>
                             <InfoCard
                                 title='SINOPSE'
                             >
-                                <span className='text-mauve-12 font-extralight'>{movie.overview + movie.overview + movie.overview}</span>
+                                <p className='text-mauve-12 font-extralight'>{movie.overview}</p>
+                            </InfoCard>
+
+                            <InfoCard
+                                title='Generos'
+                            >
+                                <div className='flex gap-[8px]'>
+                                    {movie?.genres?.map((m) => {
+                                        return (
+                                            <div className='bg-[#C150FF2E] p-[8px]'>
+                                                {m.name}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
                             </InfoCard>
                         </article>
                         <article className='flex flex-col gap-[8px]'>

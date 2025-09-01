@@ -18,13 +18,13 @@ export const Input: FC<InputProps> = ({
     icon,
 }) => {
     return (
-        <div className={`flex h-[56px] items-center border border-mauve1-opaque rounded-[4px] ${customStyles}`}>
+        <div className={`flex h-[56px] items-center border border-mauve1-opaque rounded-[4px] focus-within:border-purple-9 ${customStyles}`}>
             <input
                 type={type}
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}
-                className="pl-[16px] py-[18px] flex-1 border-none bg-transparent rounded-[4px] outline-none text-mauve-9 placeholder:text-mauve-9"
+                className="placeholder:text-[16px] pl-[16px] py-[18px] flex-1 border-none bg-transparent rounded-[4px] outline-none text-mauve-12 placeholder:text-mauve-9"
             />
             {icon && <div className="mx-[16px] outline-none">{icon}</div>}
         </div>

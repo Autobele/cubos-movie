@@ -21,6 +21,17 @@ Crie sua chave em [TMDB API](https://www.themoviedb.org/settings/api).
 2. Adicione sua chave da API na propriedade NEXT_PUBLIC_API_TMDB:
 
 
-## Rodando o Projeto
+## Instalando as dependencias
 
-Primeiramente utilize um dos gerenciadores de pacote abaixo:
+```bash
+npm install
+```
+
+## Rodando o projeto local
+
+```bash
+npm run dev
+```
+
+
+
